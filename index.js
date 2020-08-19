@@ -4,6 +4,7 @@ const util = require('util');
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
+
 //function that creats the array of questions for user
 function promptUser() {
     return inquirer.prompt([
@@ -31,7 +32,8 @@ function promptUser() {
             type: "input",
             message: "Who contributed on this project?",
             name: "contribution"
-        },{
+        },
+        {
             type: "input",
             message: "What are the test instructions?",
             name: "test"
@@ -72,12 +74,12 @@ function generateMarkdown(response) {
 # Table of Contents
 
 - [Description](#description)
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Contributing](#Contributing)
-- [Test](#Test)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Test](#test)
 - [Credits](#credits)
-- [License](#License)
+- [License](#license)
 - [Questions](#questions)
 
 ## Description:
@@ -112,11 +114,12 @@ For additional questions please reach out my email at: ${response.email}.
 async function init() {
     try {
         const response = await promptUser();
+
         const readMe = generateMarkdown(response);
 
         await writeFileAsync("README.md", readMe);
         console.log("Success!");
-    }catch (err) {
+    } catch (err) {
         console.log(err);
     }
 }
